@@ -7,7 +7,7 @@ exports.getTask = async(req, res)=>{
     try {
         const { limit = 10, offSet = 1 } = req.query; // set default limit to 10 and page to 1
         // const skip = (offSet - 1) * limit; // calculate the number of documents to skip based on the page and limit
-        const tasks = await Task.find().skip(offSet).limit(parseInt(limit));
+        const tasks = await Task.find().skip(offSet).limit(parseInt(limit)).sort({ createdAt: -1 });
         const totalResults = await Task.countDocuments();
         res.json({
             status: true,
